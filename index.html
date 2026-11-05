@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AvioSmart — Strategic Advisory for Airlines</title>
+  <meta name="description" content="AvioSmart helps airlines make smarter strategic and procurement decisions. Led by Andrés Chaves, strategic advisor to airlines." />
+  <meta name="theme-color" content="#060A13" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23060A13'/%3E%3Cpath d='M12 44 L32 14 L52 44 L32 34 Z' fill='%23FFB547'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#top" class="brand" aria-label="AvioSmart home">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="bm" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FFD27A" /><stop offset="1" stop-color="#FF8A3D" />
+          </linearGradient>
+        </defs>
+        <path d="M8 46 L32 10 L56 46 L32 35 Z" fill="url(#bm)" />
+        <path d="M32 35 L32 54" stroke="#5CC8FF" stroke-width="3" stroke-linecap="round" />
+      </svg>
+      <span class="brand-word">Avio<b>Smart</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#approach" data-i18n="nav.approach">Approach</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="es">ES</button>
+      </div>
+      <a href="#contact" class="btn btn-sm" data-i18n="nav.cta">Book a briefing</a>
+      <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <canvas id="globe" aria-hidden="true"></canvas>
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="eyebrow reveal"><span class="dot"></span><span data-i18n="hero.eyebrow">Strategic advisory for airlines</span></p>
+        <h1 class="hero-title reveal">
+          <span data-i18n="hero.t1">Smarter decisions</span><br />
+          <em data-i18n="hero.t2">at every altitude.</em>
+        </h1>
+        <p class="hero-sub reveal" data-i18n="hero.sub">AvioSmart partners with airline leadership on the calls that shape the balance sheet — from network and fleet strategy to procurement and supplier negotiations.</p>
+        <div class="hero-ctas reveal">
+          <a href="#contact" class="btn" data-i18n="hero.cta1">Request a briefing</a>
+          <a href="#services" class="btn btn-ghost" data-i18n="hero.cta2">Explore services <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="flap-wrap reveal" aria-live="polite">
+          <div class="flap-label" data-i18n="hero.now">Now advising on</div>
+          <div class="flap" id="flap" aria-label=""></div>
+        </div>
+      </div>
+      <a href="#board" class="scroll-cue" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Airline Strategy</span><i>✦</i><span>Procurement</span><i>✦</i><span>Supplier Negotiation</span><i>✦</i><span>Cost Optimization</span><i>✦</i><span>Fleet Planning</span><i>✦</i><span>Commercial Advisory</span><i>✦</i>
+        <span>Airline Strategy</span><i>✦</i><span>Procurement</span><i>✦</i><span>Supplier Negotiation</span><i>✦</i><span>Cost Optimization</span><i>✦</i><span>Fleet Planning</span><i>✦</i><span>Commercial Advisory</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ============ DEPARTURE BOARD ============ -->
+    <section class="section board-section" id="board">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker" data-i18n="board.kicker">Departures</p>
+          <h2 data-i18n="board.title">Where we take airlines next.</h2>
+        </div>
+        <div class="board reveal" role="table" aria-label="Services departure board">
+          <div class="board-row board-head" role="row">
+            <span role="columnheader" data-i18n="board.h1">Flight</span>
+            <span role="columnheader" data-i18n="board.h2">Destination</span>
+            <span role="columnheader" class="hide-sm" data-i18n="board.h3">Gate</span>
+            <span role="columnheader" data-i18n="board.h4">Status</span>
+          </div>
+          <div class="board-rows" id="boardRows"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker" data-i18n="svc.kicker">Services</p>
+          <h2 data-i18n="svc.title">Advisory built from the airline side of the table.</h2>
+          <p class="lead" data-i18n="svc.lead">Independent, senior-level guidance for carriers that want clarity before they commit capital, sign contracts, or change course.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card reveal" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-num">01</div>
+            <svg class="card-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18" /><path d="M24 6v6M24 36v6M6 24h6M36 24h6" /><path d="M24 24l8-8" class="accent" /><circle cx="24" cy="24" r="2.5" class="fill" /></svg>
+            <h3 data-i18n="svc.1.t">Airline Strategy</h3>
+            <p data-i18n="svc.1.d">Network, fleet and growth strategy pressure-tested against market realities — so every route and every tail earns its place.</p>
+          </article>
+          <article class="card reveal" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-num">02</div>
+            <svg class="card-icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="12" width="32" height="26" rx="3" /><path d="M8 20h32" /><path d="M16 28h8M16 32h14" class="accent" /><path d="M18 8v8M30 8v8" /></svg>
+            <h3 data-i18n="svc.2.t">Procurement &amp; Sourcing</h3>
+            <p data-i18n="svc.2.d">Structured sourcing for aircraft, engines, parts and services — a sharper RFP process and a wider, better-qualified supplier base.</p>
+          </article>
+          <article class="card reveal" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-num">03</div>
+            <svg class="card-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 28l10-10 8 6 8-8 10 10" /><path d="M16 18l8 14 8-16" class="accent" /><path d="M6 40h36" /></svg>
+            <h3 data-i18n="svc.3.t">Supplier Negotiation</h3>
+            <p data-i18n="svc.3.d">We sit beside your team in the room — benchmarking terms, building leverage and closing agreements that hold up over the contract life.</p>
+          </article>
+          <article class="card reveal" data-tilt>
+            <div class="card-glow"></div>
+            <div class="card-num">04</div>
+            <svg class="card-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38V22M18 38V14M28 38V26M38 38V10" /><path d="M6 12l12 6 10-8 14 4" class="accent" /></svg>
+            <h3 data-i18n="svc.4.t">Cost Optimization</h3>
+            <p data-i18n="svc.4.d">A line-by-line look at your cost base to find what can be renegotiated, restructured or retired — without touching safety or service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ APPROACH (flight path) ============ -->
+    <section class="section approach" id="approach">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker" data-i18n="ap.kicker">Approach</p>
+          <h2 data-i18n="ap.title">Every engagement flies the same disciplined profile.</h2>
+        </div>
+      </div>
+      <div class="flightpath">
+        <svg id="pathSvg" viewBox="0 0 1200 360" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="trail" x1="0" x2="1">
+              <stop offset="0" stop-color="#5CC8FF" stop-opacity="0" />
+              <stop offset=".4" stop-color="#5CC8FF" />
+              <stop offset="1" stop-color="#FFB547" />
+            </linearGradient>
+          </defs>
+          <path class="path-ghost" d="M0 320 C 180 320, 240 300, 330 230 S 480 70, 640 70 S 900 70, 980 150 S 1120 320, 1200 320" />
+          <path class="path-live" id="flightPath" pathLength="1000" d="M0 320 C 180 320, 240 300, 330 230 S 480 70, 640 70 S 900 70, 980 150 S 1120 320, 1200 320" />
+        </svg>
+        <svg class="plane" id="plane" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M62 32c0-2-2-3-5-3H40L24 6h-6l8 23H12l-5-7H2l3 10-3 10h5l5-7h14l-8 23h6l16-23h17c3 0 5-1 5-3z" />
+        </svg>
+      </div>
+      <div class="container">
+        <ol class="phases">
+          <li class="phase reveal"><span class="phase-code">PRE-FLIGHT</span><h3 data-i18n="ap.1.t">Diagnose</h3><p data-i18n="ap.1.d">We map your current position — costs, contracts, network and constraints — and agree on what success looks like.</p></li>
+          <li class="phase reveal"><span class="phase-code">TAKEOFF</span><h3 data-i18n="ap.2.t">Design</h3><p data-i18n="ap.2.d">Options are built, modeled and stress-tested. You get a clear recommendation, not a stack of slides.</p></li>
+          <li class="phase reveal"><span class="phase-code">CRUISE</span><h3 data-i18n="ap.3.t">Execute</h3><p data-i18n="ap.3.d">We run the sourcing, lead negotiations and keep stakeholders aligned until the deal is signed.</p></li>
+          <li class="phase reveal"><span class="phase-code">LANDING</span><h3 data-i18n="ap.4.t">Deliver</h3><p data-i18n="ap.4.d">Savings and terms are tracked to the bottom line, and your team keeps the playbook for next time.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT / ANDRES ============ -->
+    <section class="section about" id="about">
+      <div class="container about-grid">
+        <div class="portrait-col reveal">
+          <figure class="portrait" id="portrait">
+            <img src="assets/andres-chaves.jpg" alt="Andrés Chaves, Strategic Advisor to Airlines at AvioSmart" loading="lazy"
+                 onerror="this.closest('.portrait').classList.add('no-photo'); this.remove();" />
+            <div class="portrait-fallback" aria-hidden="true">AC</div>
+            <div class="portrait-ring" aria-hidden="true"></div>
+            <figcaption class="portrait-tag">
+              <span class="live-dot"></span> <span data-i18n="ab.tag">Strategic Advisor to Airlines</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="about-copy">
+          <p class="kicker reveal" data-i18n="ab.kicker">Meet your advisor</p>
+          <h2 class="reveal">Andrés Chaves</h2>
+          <p class="lead reveal" data-i18n="ab.lead">Andrés leads AvioSmart as a strategic advisor to airlines, helping carriers make sharper decisions on strategy, procurement and the supplier relationships that keep fleets flying.</p>
+          <p class="reveal" data-i18n="ab.body">His work sits where commercial ambition meets operational reality: he brings an airline-side perspective to every negotiation and a practical focus on outcomes that show up in the numbers.</p>
+
+          <!-- Boarding pass -->
+          <div class="pass reveal" aria-label="Boarding pass styled summary">
+            <div class="pass-main">
+              <div class="pass-top">
+                <span class="pass-brand">AVIOSMART</span>
+                <span class="pass-class" data-i18n="ab.pass.class">BOARDING PASS · BUSINESS</span>
+              </div>
+              <div class="pass-route">
+                <div><small data-i18n="ab.pass.from">FROM</small><b>NOW</b><span data-i18n="ab.pass.fromv">Your challenge</span></div>
+                <svg viewBox="0 0 64 24" aria-hidden="true"><path d="M2 12h52" stroke-dasharray="3 4" /><path d="M54 6l8 6-8 6" /></svg>
+                <div><small data-i18n="ab.pass.to">TO</small><b>NEXT</b><span data-i18n="ab.pass.tov">Your advantage</span></div>
+              </div>
+              <div class="pass-fields">
+                <div><small data-i18n="ab.pass.pax">PASSENGER</small><span>CHAVES / ANDRÉS</span></div>
+                <div><small data-i18n="ab.pass.seat">SEAT</small><span>1A</span></div>
+                <div><small data-i18n="ab.pass.focus">FOCUS</small><span data-i18n="ab.pass.focusv">STRATEGY · PROCUREMENT</span></div>
+              </div>
+            </div>
+            <div class="pass-stub">
+              <div class="barcode" aria-hidden="true"></div>
+              <a class="pass-link" href="https://www.linkedin.com/in/andres-chaves-1a20b019/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRINCIPLES ============ -->
+    <section class="section principles">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker" data-i18n="pr.kicker">Why AvioSmart</p>
+          <h2 data-i18n="pr.title">Clear air between advice and agenda.</h2>
+        </div>
+        <div class="pgrid">
+          <div class="pitem reveal"><span class="pnum">I</span><h3 data-i18n="pr.1.t">Airline-side, always</h3><p data-i18n="pr.1.d">We work for the carrier. No supplier commissions, no hidden incentives — just advice aligned with your interests.</p></div>
+          <div class="pitem reveal"><span class="pnum">II</span><h3 data-i18n="pr.2.t">Senior attention</h3><p data-i18n="pr.2.d">You work directly with the advisor whose name is on the engagement, from first call to final signature.</p></div>
+          <div class="pitem reveal"><span class="pnum">III</span><h3 data-i18n="pr.3.t">Measured in results</h3><p data-i18n="pr.3.d">Every recommendation is tied to a number you can track — cost, yield, terms or time saved.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <p class="kicker" data-i18n="ct.kicker">Contact</p>
+          <h2><span data-i18n="ct.t1">Cleared for</span> <em data-i18n="ct.t2">takeoff?</em></h2>
+          <p class="lead" data-i18n="ct.lead">Tell us where your airline wants to go. We'll come back within one business day with a short, no-obligation briefing.</p>
+          <ul class="contact-list">
+            <li><span>Email</span><a id="emailLink" href="mailto:info@aviosmart.co">info@aviosmart.co</a></li>
+            <li><span>Web</span><a href="https://aviosmart.co">aviosmart.co</a></li>
+            <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/andres-chaves-1a20b019/" target="_blank" rel="noopener">Andrés Chaves</a></li>
+          </ul>
+        </div>
+        <form class="form reveal" id="contactForm" novalidate>
+          <div class="field"><input id="f-name" name="name" required placeholder=" " autocomplete="name" /><label for="f-name" data-i18n="ct.f.name">Your name</label></div>
+          <div class="field"><input id="f-company" name="company" placeholder=" " autocomplete="organization" /><label for="f-company" data-i18n="ct.f.company">Airline / company</label></div>
+          <div class="field"><input id="f-email" name="email" type="email" required placeholder=" " autocomplete="email" /><label for="f-email" data-i18n="ct.f.email">Work email</label></div>
+          <div class="chips" role="group" aria-label="Topic">
+            <label><input type="checkbox" name="topic" value="Strategy" /><span data-i18n="svc.1.t">Airline Strategy</span></label>
+            <label><input type="checkbox" name="topic" value="Procurement" /><span data-i18n="svc.2.t">Procurement &amp; Sourcing</span></label>
+            <label><input type="checkbox" name="topic" value="Negotiation" /><span data-i18n="svc.3.t">Supplier Negotiation</span></label>
+            <label><input type="checkbox" name="topic" value="Cost" /><span data-i18n="svc.4.t">Cost Optimization</span></label>
+          </div>
+          <div class="field"><textarea id="f-msg" name="message" rows="4" placeholder=" "></textarea><label for="f-msg" data-i18n="ct.f.msg">What's on your radar?</label></div>
+          <button class="btn btn-block" type="submit"><span data-i18n="ct.f.send">Send message</span> <span aria-hidden="true">→</span></button>
+          <p class="form-note" id="formNote" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#top" class="brand small"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 46 L32 10 L56 46 L32 35 Z" fill="#FFB547" /><path d="M32 35 L32 54" stroke="#5CC8FF" stroke-width="3" stroke-linecap="round" /></svg><span class="brand-word">Avio<b>Smart</b></span></a>
+      <p>© <span id="yr"></span> AvioSmart. <span data-i18n="ft.rights">All rights reserved.</span></p>
+      <p class="footer-coords">FL390 · CRUISING · ON TIME</p>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
