@@ -3,34 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AvioSmart — Strategic Advisory for Airlines</title>
-  <meta name="description" content="AvioSmart helps airlines make smarter strategic and procurement decisions. Led by Andrés Chaves, strategic advisor to airlines." />
+  <title>AvioSmart — Aviation Procurement Execution</title>
+  <meta name="description" content="AvioSmart closes the gap between strategy and execution in aviation procurement. Experienced aviation buyers for airlines and MROs, led by Andrés Cháves." />
   <meta name="theme-color" content="#060A13" />
+  <meta property="og:title" content="AvioSmart — Aviation Procurement Execution" />
+  <meta property="og:description" content="Experienced aviation buyers who reduce backlogs, execute critical procurement projects and structure strategic negotiations." />
+  <meta property="og:image" content="assets/img/night-landing.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23060A13'/%3E%3Cpath d='M12 44 L32 14 L52 44 L32 34 Z' fill='%23FFB547'/%3E%3C/svg%3E" />
+  <link rel="icon" href="assets/aviosmart-logo.png" />
 </head>
 <body>
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
     <a href="#top" class="brand" aria-label="AvioSmart home">
-      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
-        <defs>
-          <linearGradient id="bm" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#FFD27A" /><stop offset="1" stop-color="#FF8A3D" />
-          </linearGradient>
-        </defs>
-        <path d="M8 46 L32 10 L56 46 L32 35 Z" fill="url(#bm)" />
-        <path d="M32 35 L32 54" stroke="#5CC8FF" stroke-width="3" stroke-linecap="round" />
-      </svg>
+      <img class="brand-logo" src="assets/aviosmart-logo.png" alt="" width="48" height="30" />
       <span class="brand-word">Avio<b>Smart</b></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#services" data-i18n="nav.services">Services</a>
-      <a href="#approach" data-i18n="nav.approach">Approach</a>
-      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#services" data-i18n="nav.services">What we do</a>
+      <a href="#approach" data-i18n="nav.approach">Our process</a>
+      <a href="#about" data-i18n="nav.about">Experience</a>
       <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav-right">
@@ -38,7 +33,7 @@
         <button type="button" data-lang="en" class="active">EN</button>
         <button type="button" data-lang="es">ES</button>
       </div>
-      <a href="#contact" class="btn btn-sm" data-i18n="nav.cta">Book a briefing</a>
+      <a href="#contact" class="btn btn-sm" data-i18n="nav.cta">Discuss your project</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -84,50 +79,53 @@
           <span class="hide-sm"><small>OAT</small> <b>−56°C</b></span>
         </div>
       </div>
+
       <div class="container hero-inner">
-        <p class="eyebrow reveal"><span class="dot"></span><span data-i18n="hero.eyebrow">Strategic advisory for airlines</span></p>
+        <p class="eyebrow reveal"><span class="dot"></span><span data-i18n="hero.eyebrow">Aviation procurement execution</span></p>
         <h1 class="hero-title reveal">
-          <span data-i18n="hero.t1">Smarter decisions</span><br />
-          <em data-i18n="hero.t2">at every altitude.</em>
+          <span data-i18n="hero.t1">Your backlog shouldn't keep you</span>
+          <em data-i18n="hero.t2">grounded.</em>
         </h1>
-        <p class="hero-sub reveal" data-i18n="hero.sub">AvioSmart partners with airline leadership on the calls that shape the balance sheet — from network and fleet strategy to procurement and supplier negotiations.</p>
+        <p class="hero-sub reveal" data-i18n="hero.sub">AvioSmart closes the gap between strategy and execution in aviation procurement. We strengthen purchasing teams with experienced aviation buyers — without pulling your people away from daily operations.</p>
         <div class="hero-ctas reveal">
-          <a href="#contact" class="btn" data-i18n="hero.cta1">Request a briefing</a>
-          <a href="#services" class="btn btn-ghost" data-i18n="hero.cta2">Explore services <span aria-hidden="true">→</span></a>
+          <a href="#contact" class="btn" data-i18n="hero.cta1">Discuss your project</a>
+          <a href="#signals" class="btn btn-ghost" data-i18n="hero.cta2">When to call us →</a>
         </div>
 
         <div class="flap-wrap reveal" aria-live="polite">
-          <div class="flap-label" data-i18n="hero.now">Now advising on</div>
+          <div class="flap-label" data-i18n="hero.now">Now executing</div>
           <div class="flap" id="flap" aria-label=""></div>
         </div>
       </div>
-      <a href="#board" class="scroll-cue" aria-label="Scroll down"><span></span></a>
+      <a href="#signals" class="scroll-cue" aria-label="Scroll down"><span></span></a>
     </section>
 
     <!-- ============ MARQUEE ============ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>Airline Strategy</span><i>✦</i><span>Procurement</span><i>✦</i><span>Supplier Negotiation</span><i>✦</i><span>Cost Optimization</span><i>✦</i><span>Fleet Planning</span><i>✦</i><span>Commercial Advisory</span><i>✦</i>
-        <span>Airline Strategy</span><i>✦</i><span>Procurement</span><i>✦</i><span>Supplier Negotiation</span><i>✦</i><span>Cost Optimization</span><i>✦</i><span>Fleet Planning</span><i>✦</i><span>Commercial Advisory</span><i>✦</i>
+        <span>Backlog Reduction</span><i>✦</i><span>Critical Procurement</span><i>✦</i><span>Strategic Negotiations</span><i>✦</i><span>Warranty Recovery</span><i>✦</i><span>Supplier Management</span><i>✦</i><span>Contract Control</span><i>✦</i>
+        <span>Backlog Reduction</span><i>✦</i><span>Critical Procurement</span><i>✦</i><span>Strategic Negotiations</span><i>✦</i><span>Warranty Recovery</span><i>✦</i><span>Supplier Management</span><i>✦</i><span>Contract Control</span><i>✦</i>
       </div>
     </div>
 
-    <!-- ============ DEPARTURE BOARD ============ -->
-    <section class="section board-section" id="board">
+    <!-- ============ SIGNALS (departure board) ============ -->
+    <section class="section board-section" id="signals">
       <div class="container">
         <div class="section-head reveal">
-          <p class="kicker" data-i18n="board.kicker">Departures</p>
-          <h2 data-i18n="board.title">Where we take airlines next.</h2>
+          <p class="kicker" data-i18n="board.kicker">Status board</p>
+          <h2 data-i18n="board.title">When should an airline call AvioSmart?</h2>
+          <p class="lead" data-i18n="board.lead">If any of these are on your board today, every pending requirement is carrying an operational consequence.</p>
         </div>
-        <div class="board reveal" role="table" aria-label="Services departure board">
+        <div class="board reveal" role="table" aria-label="Signs your procurement needs support">
           <div class="board-row board-head" role="row">
-            <span role="columnheader" data-i18n="board.h1">Flight</span>
-            <span role="columnheader" data-i18n="board.h2">Destination</span>
+            <span role="columnheader" data-i18n="board.h1">Ref</span>
+            <span role="columnheader" data-i18n="board.h2">Signal</span>
             <span role="columnheader" class="hide-sm" data-i18n="board.h3">Gate</span>
             <span role="columnheader" data-i18n="board.h4">Status</span>
           </div>
           <div class="board-rows" id="boardRows"></div>
         </div>
+        <p class="board-hint reveal" data-i18n="board.hint">Hover or tap a row to see it with AvioSmart on board.</p>
       </div>
     </section>
 
@@ -135,41 +133,62 @@
     <section class="section" id="services">
       <div class="container">
         <div class="section-head reveal">
-          <p class="kicker" data-i18n="svc.kicker">Services</p>
-          <h2 data-i18n="svc.title">Advisory built from the airline side of the table.</h2>
-          <p class="lead" data-i18n="svc.lead">Independent, senior-level guidance for carriers that want clarity before they commit capital, sign contracts, or change course.</p>
+          <p class="kicker" data-i18n="svc.kicker">Specialized procurement support</p>
+          <h2 data-i18n="svc.title">Additional capacity when your operation needs it.</h2>
+          <p class="lead" data-i18n="svc.lead">Purchasing backlogs grow when internal teams lack capacity or specialized expertise. AvioSmart provides experienced aviation procurement support for complete purchasing processes or specific sub-processes, on a project or ongoing basis.</p>
         </div>
 
         <div class="cards">
           <article class="card reveal" data-tilt>
+            <div class="card-media"><img src="assets/img/warehouse.jpg" alt="Aisle of a parts warehouse with stocked shelving" loading="lazy" /></div>
             <div class="card-glow"></div>
-            <div class="card-num">01</div>
-            <svg class="card-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18" /><path d="M24 6v6M24 36v6M6 24h6M36 24h6" /><path d="M24 24l8-8" class="accent" /><circle cx="24" cy="24" r="2.5" class="fill" /></svg>
-            <h3 data-i18n="svc.1.t">Airline Strategy</h3>
-            <p data-i18n="svc.1.d">Network, fleet and growth strategy pressure-tested against market realities — so every route and every tail earns its place.</p>
+            <div class="card-body">
+              <div class="card-num">01</div>
+              <h3 data-i18n="svc.1.t">Backlog Reduction</h3>
+              <p data-i18n="svc.1.d">Experienced aviation buyers who work through pending requisitions and follow-up, so critical purchases stop waiting in the queue.</p>
+            </div>
           </article>
           <article class="card reveal" data-tilt>
+            <div class="card-media"><img src="assets/img/ramp-dusk.jpg" alt="Airliner at the gate on an airport ramp at dusk" loading="lazy" /></div>
             <div class="card-glow"></div>
-            <div class="card-num">02</div>
-            <svg class="card-icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="12" width="32" height="26" rx="3" /><path d="M8 20h32" /><path d="M16 28h8M16 32h14" class="accent" /><path d="M18 8v8M30 8v8" /></svg>
-            <h3 data-i18n="svc.2.t">Procurement &amp; Sourcing</h3>
-            <p data-i18n="svc.2.d">Structured sourcing for aircraft, engines, parts and services — a sharper RFP process and a wider, better-qualified supplier base.</p>
+            <div class="card-body">
+              <div class="card-num">02</div>
+              <h3 data-i18n="svc.2.t">Critical Procurement Projects</h3>
+              <p data-i18n="svc.2.d">End-to-end execution across products, supplier landscape, aviation standards, technical requirements and the contractual framework.</p>
+            </div>
           </article>
           <article class="card reveal" data-tilt>
+            <div class="card-media"><img src="assets/img/handshake.jpg" alt="Two people shaking hands across a table" loading="lazy" /></div>
             <div class="card-glow"></div>
-            <div class="card-num">03</div>
-            <svg class="card-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 28l10-10 8 6 8-8 10 10" /><path d="M16 18l8 14 8-16" class="accent" /><path d="M6 40h36" /></svg>
-            <h3 data-i18n="svc.3.t">Supplier Negotiation</h3>
-            <p data-i18n="svc.3.d">We sit beside your team in the room — benchmarking terms, building leverage and closing agreements that hold up over the contract life.</p>
+            <div class="card-body">
+              <div class="card-num">03</div>
+              <h3 data-i18n="svc.3.t">Strategic Negotiations</h3>
+              <p data-i18n="svc.3.d">Structured contracting and negotiation processes that build leverage with suppliers and close terms that hold up.</p>
+            </div>
           </article>
           <article class="card reveal" data-tilt>
+            <div class="card-media"><img src="assets/img/contract.jpg" alt="Hand signing a contract document" loading="lazy" /></div>
             <div class="card-glow"></div>
-            <div class="card-num">04</div>
-            <svg class="card-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38V22M18 38V14M28 38V26M38 38V10" /><path d="M6 12l12 6 10-8 14 4" class="accent" /></svg>
-            <h3 data-i18n="svc.4.t">Cost Optimization</h3>
-            <p data-i18n="svc.4.d">A line-by-line look at your cost base to find what can be renegotiated, restructured or retired — without touching safety or service.</p>
+            <div class="card-body">
+              <div class="card-num">04</div>
+              <h3 data-i18n="svc.4.t">Contract &amp; Warranty Control</h3>
+              <p data-i18n="svc.4.d">Consistent monitoring of contract expirations, milestones and warranty claims, so recoverable value isn't left on the table.</p>
+            </div>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ CINEMATIC BAND ============ -->
+    <section class="band" aria-label="Statement">
+      <div class="band-media" aria-hidden="true"><img src="assets/img/night-landing.jpg" alt="" loading="lazy" /></div>
+      <div class="container band-inner">
+        <p class="kicker reveal" data-i18n="band.kicker">Why it matters</p>
+        <blockquote class="reveal">
+          <span data-i18n="band.q1">Every pending requirement carries an</span>
+          <em data-i18n="band.q2">operational consequence.</em>
+        </blockquote>
+        <p class="band-sub reveal" data-i18n="band.sub">AvioSmart does more than identify procurement problems. We provide the specialized capacity required to execute the solution.</p>
       </div>
     </section>
 
@@ -177,8 +196,9 @@
     <section class="section approach" id="approach">
       <div class="container">
         <div class="section-head reveal">
-          <p class="kicker" data-i18n="ap.kicker">Approach</p>
-          <h2 data-i18n="ap.title">Every engagement flies the same disciplined profile.</h2>
+          <p class="kicker" data-i18n="ap.kicker">Our process</p>
+          <h2 data-i18n="ap.title">From operational pressure to controlled execution.</h2>
+          <p class="lead" data-i18n="ap.lead">Every project begins with your specific operational challenge. We define the support required, establish a clear scope, and build an execution model around the products, suppliers, regulations and contractual conditions involved.</p>
         </div>
       </div>
       <div class="flightpath">
@@ -199,10 +219,10 @@
       </div>
       <div class="container">
         <ol class="phases">
-          <li class="phase reveal"><span class="phase-code">PRE-FLIGHT</span><h3 data-i18n="ap.1.t">Diagnose</h3><p data-i18n="ap.1.d">We map your current position — costs, contracts, network and constraints — and agree on what success looks like.</p></li>
-          <li class="phase reveal"><span class="phase-code">TAKEOFF</span><h3 data-i18n="ap.2.t">Design</h3><p data-i18n="ap.2.d">Options are built, modeled and stress-tested. You get a clear recommendation, not a stack of slides.</p></li>
-          <li class="phase reveal"><span class="phase-code">CRUISE</span><h3 data-i18n="ap.3.t">Execute</h3><p data-i18n="ap.3.d">We run the sourcing, lead negotiations and keep stakeholders aligned until the deal is signed.</p></li>
-          <li class="phase reveal"><span class="phase-code">LANDING</span><h3 data-i18n="ap.4.t">Deliver</h3><p data-i18n="ap.4.d">Savings and terms are tracked to the bottom line, and your team keeps the playbook for next time.</p></li>
+          <li class="phase reveal"><span class="phase-code">PRE-FLIGHT</span><h3 data-i18n="ap.1.t">We understand the challenge</h3><p data-i18n="ap.1.d">You share your purchasing backlog, project requirements, negotiation needs, internal constraints and expected outcomes. We identify where execution is being delayed.</p></li>
+          <li class="phase reveal"><span class="phase-code">TAKEOFF</span><h3 data-i18n="ap.2.t">We assess the landscape</h3><p data-i18n="ap.2.d">We review the products or services, supplier landscape, aviation standards, technical requirements and contracts — and decide whether you need a complete process or a specific sub-process.</p></li>
+          <li class="phase reveal"><span class="phase-code">CRUISE</span><h3 data-i18n="ap.3.t">We propose the operating model</h3><p data-i18n="ap.3.d">Scope, responsibilities, team structure and method of execution. Once approved, we present the commercial terms and formalize the service agreement.</p></li>
+          <li class="phase reveal"><span class="phase-code">LANDING</span><h3 data-i18n="ap.4.t">We execute with visibility</h3><p data-i18n="ap.4.d">Experienced buyers execute under senior guidance, with visibility over requirements, supplier commitments, contract milestones, delivery risks and progress.</p></li>
         </ol>
       </div>
     </section>
@@ -212,21 +232,21 @@
       <div class="container about-grid">
         <div class="portrait-col reveal">
           <figure class="portrait" id="portrait">
-            <img src="assets/andres-chaves.jpg" alt="Andrés Chaves, Strategic Advisor to Airlines at AvioSmart" loading="lazy"
+            <img src="assets/andres-chaves.jpg" alt="Andrés Cháves, who leads AvioSmart" width="960" height="1200" loading="lazy"
                  onerror="this.closest('.portrait').classList.add('no-photo'); this.remove();" />
             <div class="portrait-fallback" aria-hidden="true">AC</div>
             <div class="portrait-ring" aria-hidden="true"></div>
             <figcaption class="portrait-tag">
-              <span class="live-dot"></span> <span data-i18n="ab.tag">Strategic Advisor to Airlines</span>
+              <span class="live-dot"></span> <span data-i18n="ab.tag">26+ years in aviation</span>
             </figcaption>
           </figure>
         </div>
 
         <div class="about-copy">
-          <p class="kicker reveal" data-i18n="ab.kicker">Meet your advisor</p>
-          <h2 class="reveal">Andrés Chaves</h2>
-          <p class="lead reveal" data-i18n="ab.lead">Andrés leads AvioSmart as a strategic advisor to airlines, helping carriers make sharper decisions on strategy, procurement and the supplier relationships that keep fleets flying.</p>
-          <p class="reveal" data-i18n="ab.body">His work sits where commercial ambition meets operational reality: he brings an airline-side perspective to every negotiation and a practical focus on outcomes that show up in the numbers.</p>
+          <p class="kicker reveal" data-i18n="ab.kicker">Industry experience</p>
+          <h2 class="reveal">Andrés Cháves</h2>
+          <p class="lead reveal" data-i18n="ab.lead">A procurement perspective built on both sides of the industry. Andrés is an aviation executive with more than 26 years of experience across airline operations and aerospace manufacturing.</p>
+          <p class="reveal" data-i18n="ab.body">That combination brings practical insight into airline operational urgency, technical requirements, supply chain constraints, contractual conditions and the production limitations that affect supplier performance.</p>
 
           <!-- Boarding pass -->
           <div class="pass reveal" aria-label="Boarding pass styled summary">
@@ -236,14 +256,14 @@
                 <span class="pass-class" data-i18n="ab.pass.class">BOARDING PASS · BUSINESS</span>
               </div>
               <div class="pass-route">
-                <div><small data-i18n="ab.pass.from">FROM</small><b>NOW</b><span data-i18n="ab.pass.fromv">Your challenge</span></div>
+                <div><small data-i18n="ab.pass.from">FROM</small><b>OPS</b><span data-i18n="ab.pass.fromv">Airline operations</span></div>
                 <svg viewBox="0 0 64 24" aria-hidden="true"><path d="M2 12h52" stroke-dasharray="3 4" /><path d="M54 6l8 6-8 6" /></svg>
-                <div><small data-i18n="ab.pass.to">TO</small><b>NEXT</b><span data-i18n="ab.pass.tov">Your advantage</span></div>
+                <div><small data-i18n="ab.pass.to">TO</small><b>MFG</b><span data-i18n="ab.pass.tov">Aerospace manufacturing</span></div>
               </div>
               <div class="pass-fields">
-                <div><small data-i18n="ab.pass.pax">PASSENGER</small><span>CHAVES / ANDRÉS</span></div>
+                <div><small data-i18n="ab.pass.pax">PASSENGER</small><span>CHÁVES / ANDRÉS</span></div>
                 <div><small data-i18n="ab.pass.seat">SEAT</small><span>1A</span></div>
-                <div><small data-i18n="ab.pass.focus">FOCUS</small><span data-i18n="ab.pass.focusv">STRATEGY · PROCUREMENT</span></div>
+                <div><small data-i18n="ab.pass.focus">EXPERIENCE</small><span data-i18n="ab.pass.focusv">26+ YEARS</span></div>
               </div>
             </div>
             <div class="pass-stub">
@@ -258,43 +278,52 @@
       </div>
     </section>
 
-    <!-- ============ PRINCIPLES ============ -->
-    <section class="section principles">
+    <!-- ============ TRACK RECORD ============ -->
+    <section class="section record">
       <div class="container">
         <div class="section-head reveal">
-          <p class="kicker" data-i18n="pr.kicker">Why AvioSmart</p>
-          <h2 data-i18n="pr.title">Clear air between advice and agenda.</h2>
+          <p class="kicker" data-i18n="tr.kicker">Track record</p>
+          <h2 data-i18n="tr.title">Results that show up in the numbers.</h2>
         </div>
-        <div class="pgrid">
-          <div class="pitem reveal"><span class="pnum">I</span><h3 data-i18n="pr.1.t">Airline-side, always</h3><p data-i18n="pr.1.d">We work for the carrier. No supplier commissions, no hidden incentives — just advice aligned with your interests.</p></div>
-          <div class="pitem reveal"><span class="pnum">II</span><h3 data-i18n="pr.2.t">Senior attention</h3><p data-i18n="pr.2.d">You work directly with the advisor whose name is on the engagement, from first call to final signature.</p></div>
-          <div class="pitem reveal"><span class="pnum">III</span><h3 data-i18n="pr.3.t">Measured in results</h3><p data-i18n="pr.3.d">Every recommendation is tied to a number you can track — cost, yield, terms or time saved.</p></div>
+        <div class="stats">
+          <div class="stat reveal"><b class="count" data-to="80" data-suffix="%">0%</b><p data-i18n="tr.s1">Success rate in warranty claims for a major airline group</p></div>
+          <div class="stat reveal"><b class="count" data-to="2.5" data-prefix="US$" data-suffix="M" data-dec="1">US$0M</b><p data-i18n="tr.s2">Reported annual recovery from warranty claims</p></div>
+          <div class="stat reveal"><b class="count" data-to="30" data-prefix="+" data-suffix="%">+0%</b><p data-i18n="tr.s3">Reported revenue increase in year one for a leading aviation manufacturer</p></div>
+          <div class="stat reveal"><b class="count" data-to="20" data-prefix="+" data-suffix="%">+0%</b><p data-i18n="tr.s4">Reported growth in recurring business and referrals with airlines and MROs</p></div>
         </div>
+        <ul class="milestones">
+          <li class="reveal"><span class="ms-dot"></span><span data-i18n="tr.m1">Created a Strategic Sourcing and Warranty Control Department for a major airline group.</span></li>
+          <li class="reveal"><span class="ms-dot"></span><span data-i18n="tr.m2">Developed strategic contracting and negotiation processes for a major airline group.</span></li>
+          <li class="reveal"><span class="ms-dot"></span><span data-i18n="tr.m3">Created a centralized contract database that improved access to procurement documentation across the organization.</span></li>
+          <li class="reveal"><span class="ms-dot"></span><span data-i18n="tr.m4">Built an international network of relationships across airlines, MROs, manufacturers and aviation suppliers.</span></li>
+        </ul>
       </div>
     </section>
 
     <!-- ============ CONTACT ============ -->
     <section class="section contact" id="contact">
+      <div class="contact-media" aria-hidden="true"><img src="assets/img/gate-sunset.jpg" alt="" loading="lazy" /></div>
       <div class="container contact-grid">
         <div class="contact-copy reveal">
           <p class="kicker" data-i18n="ct.kicker">Contact</p>
           <h2><span data-i18n="ct.t1">Cleared for</span> <em data-i18n="ct.t2">takeoff?</em></h2>
-          <p class="lead" data-i18n="ct.lead">Tell us where your airline wants to go. We'll come back within one business day with a short, no-obligation briefing.</p>
+          <p class="lead" data-i18n="ct.lead">Address the backlog before it limits your options. If your team needs more capacity to reduce pending requisitions, improve procurement processes or execute strategic negotiations, let's discuss your project.</p>
           <ul class="contact-list">
             <li><span>Email</span><a id="emailLink" href="mailto:info@aviosmart.co">info@aviosmart.co</a></li>
-            <li><span>Web</span><a href="https://aviosmart.co">aviosmart.co</a></li>
-            <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/andres-chaves-1a20b019/" target="_blank" rel="noopener">Andrés Chaves</a></li>
+            <li><span>LinkedIn</span><a href="https://www.linkedin.com/company/aviosmart/" target="_blank" rel="noopener">AvioSmart</a></li>
+            <li><span data-i18n="ct.lead2">Leadership</span><a href="https://www.linkedin.com/in/andres-chaves-1a20b019/" target="_blank" rel="noopener">Andrés Cháves</a></li>
           </ul>
+          <p class="careers" data-i18n="ct.careers">Aviation buyer? AvioSmart is always open to talented professionals. Send your résumé to info@aviosmart.co.</p>
         </div>
         <form class="form reveal" id="contactForm" novalidate>
           <div class="field"><input id="f-name" name="name" required placeholder=" " autocomplete="name" /><label for="f-name" data-i18n="ct.f.name">Your name</label></div>
-          <div class="field"><input id="f-company" name="company" placeholder=" " autocomplete="organization" /><label for="f-company" data-i18n="ct.f.company">Airline / company</label></div>
+          <div class="field"><input id="f-company" name="company" placeholder=" " autocomplete="organization" /><label for="f-company" data-i18n="ct.f.company">Airline / MRO</label></div>
           <div class="field"><input id="f-email" name="email" type="email" required placeholder=" " autocomplete="email" /><label for="f-email" data-i18n="ct.f.email">Work email</label></div>
           <div class="chips" role="group" aria-label="Topic">
-            <label><input type="checkbox" name="topic" value="Strategy" /><span data-i18n="svc.1.t">Airline Strategy</span></label>
-            <label><input type="checkbox" name="topic" value="Procurement" /><span data-i18n="svc.2.t">Procurement &amp; Sourcing</span></label>
-            <label><input type="checkbox" name="topic" value="Negotiation" /><span data-i18n="svc.3.t">Supplier Negotiation</span></label>
-            <label><input type="checkbox" name="topic" value="Cost" /><span data-i18n="svc.4.t">Cost Optimization</span></label>
+            <label><input type="checkbox" name="topic" value="Backlog reduction" /><span data-i18n="svc.1.t">Backlog Reduction</span></label>
+            <label><input type="checkbox" name="topic" value="Critical procurement project" /><span data-i18n="svc.2.t">Critical Procurement Projects</span></label>
+            <label><input type="checkbox" name="topic" value="Strategic negotiation" /><span data-i18n="svc.3.t">Strategic Negotiations</span></label>
+            <label><input type="checkbox" name="topic" value="Contract & warranty control" /><span data-i18n="svc.4.t">Contract &amp; Warranty Control</span></label>
           </div>
           <div class="field"><textarea id="f-msg" name="message" rows="4" placeholder=" "></textarea><label for="f-msg" data-i18n="ct.f.msg">What's on your radar?</label></div>
           <button class="btn btn-block" type="submit"><span data-i18n="ct.f.send">Send message</span> <span aria-hidden="true">→</span></button>
@@ -306,7 +335,7 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <a href="#top" class="brand small"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 46 L32 10 L56 46 L32 35 Z" fill="#FFB547" /><path d="M32 35 L32 54" stroke="#5CC8FF" stroke-width="3" stroke-linecap="round" /></svg><span class="brand-word">Avio<b>Smart</b></span></a>
+      <a href="#top" class="brand small"><img class="brand-logo" src="assets/aviosmart-logo.png" alt="" width="38" height="24" /><span class="brand-word">Avio<b>Smart</b></span></a>
       <p>© <span id="yr"></span> AvioSmart. <span data-i18n="ft.rights">All rights reserved.</span></p>
       <p class="footer-coords">FL390 · CRUISING · ON TIME</p>
     </div>

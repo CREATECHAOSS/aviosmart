@@ -4,7 +4,7 @@
 (() => {
   "use strict";
 
-  const CONTACT_EMAIL = "info@aviosmart.co"; // ← confirm with client
+  const CONTACT_EMAIL = "info@aviosmart.co";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -13,63 +13,81 @@
      i18n (EN / ES)
   --------------------------------------------------------- */
   const ES = {
-    "nav.services": "Servicios", "nav.approach": "Método", "nav.about": "Nosotros", "nav.contact": "Contacto",
-    "nav.cta": "Agendar reunión",
-    "hero.eyebrow": "Asesoría estratégica para aerolíneas",
-    "hero.t1": "Decisiones más inteligentes", "hero.t2": "a cualquier altitud.",
-    "hero.sub": "AvioSmart acompaña a la alta dirección de aerolíneas en las decisiones que definen el balance — desde la estrategia de red y flota hasta las compras y la negociación con proveedores.",
-    "hero.cta1": "Solicitar una reunión", "hero.cta2": "Ver servicios →", "hero.now": "Asesorando en",
-    "board.kicker": "Salidas", "board.title": "Hacia dónde llevamos a las aerolíneas.",
-    "board.h1": "Vuelo", "board.h2": "Destino", "board.h3": "Puerta", "board.h4": "Estado",
-    "svc.kicker": "Servicios", "svc.title": "Asesoría construida desde el lado de la aerolínea.",
-    "svc.lead": "Orientación independiente y de alto nivel para aerolíneas que quieren claridad antes de invertir capital, firmar contratos o cambiar de rumbo.",
-    "svc.1.t": "Estrategia de Aerolínea",
-    "svc.1.d": "Estrategia de red, flota y crecimiento contrastada con la realidad del mercado — para que cada ruta y cada avión justifiquen su lugar.",
-    "svc.2.t": "Compras y Abastecimiento",
-    "svc.2.d": "Abastecimiento estructurado de aeronaves, motores, partes y servicios — un proceso de RFP más preciso y una base de proveedores más amplia y calificada.",
-    "svc.3.t": "Negociación con Proveedores",
-    "svc.3.d": "Nos sentamos junto a su equipo en la mesa — comparando condiciones, construyendo poder de negociación y cerrando acuerdos que se sostienen en el tiempo.",
-    "svc.4.t": "Optimización de Costos",
-    "svc.4.d": "Una revisión línea por línea de su estructura de costos para encontrar qué renegociar, reestructurar o eliminar — sin afectar la seguridad ni el servicio.",
-    "ap.kicker": "Método", "ap.title": "Cada proyecto vuela el mismo perfil disciplinado.",
-    "ap.1.t": "Diagnóstico", "ap.1.d": "Mapeamos su posición actual — costos, contratos, red y restricciones — y acordamos cómo se ve el éxito.",
-    "ap.2.t": "Diseño", "ap.2.d": "Construimos, modelamos y ponemos a prueba las opciones. Usted recibe una recomendación clara, no una pila de diapositivas.",
-    "ap.3.t": "Ejecución", "ap.3.d": "Dirigimos el abastecimiento, lideramos las negociaciones y mantenemos alineados a los interesados hasta la firma.",
-    "ap.4.t": "Resultados", "ap.4.d": "Los ahorros y las condiciones se miden hasta el resultado final, y su equipo conserva el método para la próxima vez.",
-    "ab.tag": "Asesor estratégico de aerolíneas", "ab.kicker": "Conozca a su asesor",
-    "ab.lead": "Andrés lidera AvioSmart como asesor estratégico de aerolíneas, ayudando a las compañías a tomar mejores decisiones en estrategia, compras y en las relaciones con proveedores que mantienen las flotas en el aire.",
-    "ab.body": "Su trabajo está donde la ambición comercial se encuentra con la realidad operativa: aporta la perspectiva de la aerolínea a cada negociación y un enfoque práctico en resultados que se reflejan en los números.",
-    "ab.pass.class": "PASE DE ABORDAR · EJECUTIVA", "ab.pass.from": "DESDE", "ab.pass.fromv": "Su desafío",
-    "ab.pass.to": "HACIA", "ab.pass.tov": "Su ventaja", "ab.pass.pax": "PASAJERO", "ab.pass.seat": "ASIENTO",
-    "ab.pass.focus": "ENFOQUE", "ab.pass.focusv": "ESTRATEGIA · COMPRAS",
-    "pr.kicker": "Por qué AvioSmart", "pr.title": "Cielo despejado entre el consejo y los intereses.",
-    "pr.1.t": "Siempre del lado de la aerolínea", "pr.1.d": "Trabajamos para la aerolínea. Sin comisiones de proveedores ni incentivos ocultos — solo asesoría alineada con sus intereses.",
-    "pr.2.t": "Atención senior", "pr.2.d": "Trabaja directamente con el asesor responsable del proyecto, desde la primera llamada hasta la firma final.",
-    "pr.3.t": "Medido en resultados", "pr.3.d": "Cada recomendación está ligada a un número que puede seguir — costo, rendimiento, condiciones o tiempo ahorrado.",
+    "nav.services": "Qué hacemos", "nav.approach": "Proceso", "nav.about": "Experiencia", "nav.contact": "Contacto",
+    "nav.cta": "Hablemos de su proyecto",
+    "hero.eyebrow": "Ejecución de compras aeronáuticas",
+    "hero.t1": "Sus pendientes no deberían dejarlo", "hero.t2": "en tierra.",
+    "hero.sub": "AvioSmart cierra la brecha entre la estrategia y la ejecución en las compras aeronáuticas. Fortalecemos los equipos de compras con compradores de aviación experimentados — sin alejar a su gente de la operación diaria.",
+    "hero.cta1": "Hablemos de su proyecto", "hero.cta2": "Cuándo llamarnos →", "hero.now": "Ejecutando ahora",
+    "board.kicker": "Tablero de estado", "board.title": "¿Cuándo debería una aerolínea llamar a AvioSmart?",
+    "board.lead": "Si alguna de estas señales está hoy en su tablero, cada requerimiento pendiente tiene una consecuencia operativa.",
+    "board.h1": "Ref", "board.h2": "Señal", "board.h3": "Puerta", "board.h4": "Estado",
+    "board.hint": "Pase el cursor o toque una fila para verla con AvioSmart a bordo.",
+    "svc.kicker": "Soporte especializado en compras", "svc.title": "Capacidad adicional cuando su operación la necesita.",
+    "svc.lead": "Los pendientes de compras crecen cuando los equipos internos no tienen la capacidad o la especialización necesaria. AvioSmart brinda soporte experimentado en compras aeronáuticas para procesos completos o subprocesos específicos, por proyecto o de forma continua.",
+    "svc.1.t": "Reducción de Pendientes",
+    "svc.1.d": "Compradores de aviación experimentados que avanzan las requisiciones pendientes y su seguimiento, para que las compras críticas dejen de esperar en la fila.",
+    "svc.2.t": "Proyectos de Compras Críticas",
+    "svc.2.d": "Ejecución de principio a fin: productos, panorama de proveedores, estándares aeronáuticos, requisitos técnicos y marco contractual.",
+    "svc.3.t": "Negociaciones Estratégicas",
+    "svc.3.d": "Procesos estructurados de contratación y negociación que generan poder de negociación con los proveedores y cierran condiciones que se sostienen.",
+    "svc.4.t": "Control de Contratos y Garantías",
+    "svc.4.d": "Monitoreo constante de vencimientos, hitos contractuales y reclamos de garantía, para no dejar valor recuperable sobre la mesa.",
+    "band.kicker": "Por qué importa", "band.q1": "Cada requerimiento pendiente tiene una", "band.q2": "consecuencia operativa.",
+    "band.sub": "AvioSmart no solo identifica los problemas de compras. Aportamos la capacidad especializada necesaria para ejecutar la solución.",
+    "ap.kicker": "Nuestro proceso", "ap.title": "De la presión operativa a la ejecución controlada.",
+    "ap.lead": "Cada proyecto comienza con su desafío operativo específico. Definimos el soporte requerido, establecemos un alcance claro y construimos un modelo de ejecución alrededor de los productos, proveedores, regulaciones y condiciones contractuales involucradas.",
+    "ap.1.t": "Entendemos el desafío", "ap.1.d": "Usted comparte sus pendientes de compras, requisitos del proyecto, necesidades de negociación, restricciones internas y resultados esperados. Identificamos dónde se está demorando la ejecución.",
+    "ap.2.t": "Evaluamos el panorama", "ap.2.d": "Revisamos los productos o servicios, el panorama de proveedores, los estándares aeronáuticos, los requisitos técnicos y los contratos — y definimos si necesita un proceso completo o un subproceso específico.",
+    "ap.3.t": "Proponemos el modelo operativo", "ap.3.d": "Alcance, responsabilidades, estructura del equipo y método de ejecución. Una vez aprobado, presentamos las condiciones comerciales y formalizamos el acuerdo de servicio.",
+    "ap.4.t": "Ejecutamos con visibilidad", "ap.4.d": "Compradores experimentados ejecutan bajo la guía de un equipo senior, con visibilidad sobre requerimientos, compromisos de proveedores, hitos contractuales, riesgos de entrega y avance.",
+    "ab.tag": "26+ años en aviación", "ab.kicker": "Experiencia en la industria",
+    "ab.lead": "Una perspectiva de compras construida desde ambos lados de la industria. Andrés es un ejecutivo de aviación con más de 26 años de experiencia en operaciones de aerolíneas y manufactura aeroespacial.",
+    "ab.body": "Esa combinación aporta una visión práctica de la urgencia operativa de las aerolíneas, los requisitos técnicos, las restricciones de la cadena de suministro, las condiciones contractuales y las limitaciones de producción que afectan el desempeño de los proveedores.",
+    "ab.pass.class": "PASE DE ABORDAR · EJECUTIVA", "ab.pass.from": "DESDE", "ab.pass.fromv": "Operación de aerolíneas",
+    "ab.pass.to": "HACIA", "ab.pass.tov": "Manufactura aeroespacial", "ab.pass.pax": "PASAJERO", "ab.pass.seat": "ASIENTO",
+    "ab.pass.focus": "EXPERIENCIA", "ab.pass.focusv": "26+ AÑOS",
+    "tr.kicker": "Trayectoria", "tr.title": "Resultados que se reflejan en los números.",
+    "tr.s1": "Tasa de éxito en reclamos de garantía para un importante grupo aerolíneo",
+    "tr.s2": "Recuperación anual reportada por reclamos de garantía",
+    "tr.s3": "Aumento de ingresos reportado en el primer año para un fabricante aeronáutico líder",
+    "tr.s4": "Crecimiento reportado en negocios recurrentes y referidos con aerolíneas y MROs",
+    "tr.m1": "Creó un Departamento de Abastecimiento Estratégico y Control de Garantías para un importante grupo aerolíneo.",
+    "tr.m2": "Desarrolló procesos estratégicos de contratación y negociación para un importante grupo aerolíneo.",
+    "tr.m3": "Creó una base de datos centralizada de contratos que mejoró el acceso a la documentación de compras en toda la organización.",
+    "tr.m4": "Construyó una red internacional de relaciones con aerolíneas, MROs, fabricantes y proveedores aeronáuticos.",
     "ct.kicker": "Contacto", "ct.t1": "¿Listos para el", "ct.t2": "despegue?",
-    "ct.lead": "Cuéntenos hacia dónde quiere ir su aerolínea. Le responderemos en un día hábil con una reunión breve y sin compromiso.",
-    "ct.f.name": "Su nombre", "ct.f.company": "Aerolínea / empresa", "ct.f.email": "Correo corporativo",
+    "ct.lead": "Atienda los pendientes antes de que limiten sus opciones. Si su equipo necesita más capacidad para reducir requisiciones pendientes, mejorar los procesos de compras o ejecutar negociaciones estratégicas, hablemos de su proyecto.",
+    "ct.lead2": "Dirección",
+    "ct.careers": "¿Comprador de aviación? AvioSmart siempre está abierto a profesionales talentosos. Envíe su hoja de vida a info@aviosmart.co.",
+    "ct.f.name": "Su nombre", "ct.f.company": "Aerolínea / MRO", "ct.f.email": "Correo corporativo",
     "ct.f.msg": "¿Qué tiene en su radar?", "ct.f.send": "Enviar mensaje",
     "ft.rights": "Todos los derechos reservados."
   };
 
   const FLAP = {
-    en: ["AIRLINE STRATEGY", "PROCUREMENT", "SUPPLIER DEALS", "FLEET PLANNING", "COST REDUCTION", "NEGOTIATIONS"],
-    es: ["ESTRATEGIA", "COMPRAS", "PROVEEDORES", "PLAN DE FLOTA", "AHORRO DE COSTOS", "NEGOCIACIONES"]
+    en: ["BACKLOG CONTROL", "CRITICAL BUYS", "NEGOTIATIONS", "WARRANTY CLAIMS", "SUPPLIER DEALS", "CONTRACT CONTROL"],
+    es: ["PENDIENTES", "COMPRAS CRITICAS", "NEGOCIACIONES", "GARANTIAS", "PROVEEDORES", "CONTRATOS"]
   };
 
+  // "When should an airline contact AvioSmart?" — signals from the current aviosmart.co
   const BOARD = [
-    { fl: "AS101", gate: "A1", en: "Airline Strategy", es: "Estrategia de aerolínea", st: "boarding" },
-    { fl: "AS204", gate: "B4", en: "Procurement & Sourcing", es: "Compras y abastecimiento", st: "ontime" },
-    { fl: "AS318", gate: "C2", en: "Supplier Negotiation", es: "Negociación con proveedores", st: "final" },
-    { fl: "AS427", gate: "D7", en: "Cost Optimization", es: "Optimización de costos", st: "ontime" },
-    { fl: "AS512", gate: "A3", en: "Fleet Planning", es: "Planificación de flota", st: "boarding" },
-    { fl: "AS640", gate: "E1", en: "Commercial Advisory", es: "Asesoría comercial", st: "ontime" }
+    { fl: "REQ01", gate: "A1", sev: "bad",
+      en: ["Requisitions piling up", "Requisitions are accumulating faster than the team can process them.", "Delayed", "Cleared"],
+      es: ["Requisiciones acumuladas", "Las requisiciones se acumulan más rápido de lo que el equipo puede procesarlas.", "Demorado", "Despejado"] },
+    { fl: "CRT02", gate: "B4", sev: "warn",
+      en: ["Critical buys stalled", "Critical purchases are delayed due to limited follow-up capacity.", "Holding", "On time"],
+      es: ["Compras críticas detenidas", "Las compras críticas se retrasan por falta de capacidad de seguimiento.", "En espera", "A tiempo"] },
+    { fl: "OPS03", gate: "C2", sev: "warn",
+      en: ["Team pulled off ops", "Projects and negotiations are pulling internal teams away from daily operations.", "Diverted", "On course"],
+      es: ["Equipo fuera de la operación", "Los proyectos y negociaciones alejan al equipo interno de la operación diaria.", "Desviado", "En curso"] },
+    { fl: "WTY04", gate: "D7", sev: "bad",
+      en: ["Warranties unmonitored", "Contract expirations and warranty claims are not being consistently monitored.", "At risk", "Monitored"],
+      es: ["Garantías sin control", "Los vencimientos de contratos y los reclamos de garantía no se monitorean de forma constante.", "En riesgo", "Controlado"] },
+    { fl: "CAP05", gate: "E1", sev: "warn",
+      en: ["Need buyers, not headcount", "You need experienced aviation buyers without immediately expanding the permanent team.", "Final call", "Boarding"],
+      es: ["Compradores sin ampliar nómina", "Necesita compradores de aviación experimentados sin ampliar de inmediato el equipo permanente.", "Última llamada", "Abordando"] }
   ];
-  const STATUS = {
-    en: { boarding: "Boarding", ontime: "On time", final: "Final call" },
-    es: { boarding: "Abordando", ontime: "A tiempo", final: "Última llamada" }
-  };
 
   const i18nEls = $$("[data-i18n]");
   const EN = {};
@@ -165,14 +183,16 @@
   }
 
   /* ---------------------------------------------------------
-     Departure board
+     Status board: problems flip to "with AvioSmart" on hover / tap
   --------------------------------------------------------- */
   const rowsEl = $("#boardRows");
   function scramble(el, text, dur = 700) {
     if (reduceMotion) { el.textContent = text; return; }
     const glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const start = performance.now();
+    const token = (el._scr = (el._scr || 0) + 1);
     const step = now => {
+      if (el._scr !== token) return;
       const p = Math.min(1, (now - start) / dur);
       const n = Math.floor(p * text.length);
       let out = text.slice(0, n);
@@ -182,21 +202,31 @@
     };
     requestAnimationFrame(step);
   }
+  function setRowState(row, r, fixed) {
+    row.classList.toggle("fixed", fixed);
+    const st = $(".status", row);
+    st.className = `status ${fixed ? "ok" : r.sev}`;
+    scramble(st, r[lang][fixed ? 3 : 2], 420);
+  }
   function renderBoard(animate) {
     rowsEl.innerHTML = "";
     BOARD.forEach((r, i) => {
       const row = document.createElement("div");
-      row.className = "board-row"; row.setAttribute("role", "row");
+      row.className = "board-row"; row.setAttribute("role", "row"); row.tabIndex = 0;
       row.innerHTML = `
         <span class="fl" role="cell">${r.fl}</span>
-        <span class="dest" role="cell"></span>
+        <span class="dest-cell" role="cell"><span class="dest"></span><span class="desc">${r[lang][1]}</span></span>
         <span class="gate hide-sm" role="cell">${r.gate}</span>
-        <span class="status-cell" role="cell"><span class="status ${r.st}"></span></span>`;
+        <span class="status-cell" role="cell"><span class="status ${r.sev}"></span></span>`;
       rowsEl.appendChild(row);
       const dest = $(".dest", row), st = $(".status", row);
-      if (animate) {
-        setTimeout(() => { scramble(dest, r[lang]); scramble(st, STATUS[lang][r.st], 500); }, i * 120);
-      } else { dest.textContent = r[lang]; st.textContent = STATUS[lang][r.st]; }
+      if (animate) setTimeout(() => { scramble(dest, r[lang][0]); scramble(st, r[lang][2], 500); }, i * 120);
+      else { dest.textContent = r[lang][0]; st.textContent = r[lang][2]; }
+      row.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") setRowState(row, r, true); });
+      row.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") setRowState(row, r, false); });
+      row.addEventListener("click", e => { if (e.pointerType !== "mouse") setRowState(row, r, !row.classList.contains("fixed")); });
+      row.addEventListener("focus", () => setRowState(row, r, true));
+      row.addEventListener("blur", () => setRowState(row, r, false));
     });
   }
   renderBoard(false);
@@ -204,14 +234,49 @@
     if (e.isIntersecting) { renderBoard(true); boardIO.disconnect(); }
   }, { threshold: 0.3 });
   boardIO.observe($(".board"));
-  // gently cycle statuses
-  if (!reduceMotion) setInterval(() => {
-    const i = (Math.random() * BOARD.length) | 0;
-    const order = ["ontime", "boarding", "final"];
-    BOARD[i].st = order[(order.indexOf(BOARD[i].st) + 1) % order.length];
-    const st = rowsEl.children[i] && $(".status", rowsEl.children[i]);
-    if (st) { st.className = `status ${BOARD[i].st}`; scramble(st, STATUS[lang][BOARD[i].st], 450); }
-  }, 2800);
+  if (!window.matchMedia("(hover: hover)").matches) {
+    const hint = $(".board-hint");
+    if (hint) hint.dataset.touch = "1";
+  }
+
+  /* ---------------------------------------------------------
+     Count-up stats
+  --------------------------------------------------------- */
+  const countIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      countIO.unobserve(e.target);
+      const el = e.target, to = parseFloat(el.dataset.to), dec = +(el.dataset.dec || 0);
+      const pre = el.dataset.prefix || "", suf = el.dataset.suffix || "";
+      const fmtN = v => pre + v.toFixed(dec) + suf;
+      if (reduceMotion) { el.textContent = fmtN(to); return; }
+      const t0 = performance.now(), dur = 1600;
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmtN(to * k);
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.5 });
+  $$(".count").forEach(el => countIO.observe(el));
+
+  /* ---------------------------------------------------------
+     Photo parallax
+  --------------------------------------------------------- */
+  const parallax = $$(".band-media img, .contact-media img");
+  function updateParallax() {
+    if (reduceMotion) return;
+    const vh = window.innerHeight;
+    parallax.forEach(img => {
+      const r = img.parentElement.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      const p = (r.top + r.height / 2 - vh / 2) / (vh + r.height);
+      img.style.transform = `translate3d(0, ${p * -18}%, 0) scale(1.18)`;
+    });
+  }
+  window.addEventListener("scroll", () => requestAnimationFrame(updateParallax), { passive: true });
+  updateParallax();
 
   /* ---------------------------------------------------------
      Card tilt + glow
@@ -384,8 +449,8 @@
     SCALE = Math.min(window.devicePixelRatio || 1, desktop ? 1 : 1.5) * (desktop ? 0.7 : 0.8);
     canvas.width = Math.round(W * SCALE); canvas.height = Math.round(H * SCALE);
     px = desktop ? W * 0.68 : W * 0.5;
-    py = desktop ? H * 0.56 : H * 0.6;
-    sunAz = desktop ? 0.2 : 0.06;
+    py = desktop ? H * 0.56 : H * 0.84;
+    sunAz = desktop ? 0.2 : 0.17;
     hero.style.setProperty("--px", px + "px");
     hero.style.setProperty("--py", py + "px");
     buildLadder(H);
