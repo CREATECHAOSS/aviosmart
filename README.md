@@ -3,7 +3,7 @@
 A redesign concept for [aviosmart.co](https://aviosmart.co). It's a static site with no build step: open `index.html` in a browser, or host the folder anywhere (Netlify, Vercel, GitHub Pages, S3).
 
 ## What's in it
-- **Hero (cockpit view):** a real-time WebGL dawn sky over an endless sea of clouds, with a pilot's head-up display on top (pitch ladder, roll scale, heading tape, altimeter). Moving the mouse banks the plane, and banking turns it, so the sun moves across the sky. Scrolling pitches the nose down and descends the altimeter. A split-flap "Now advising on" display sits below the headline. If WebGL isn't available, a CSS sunset gradient shows instead.
+- **Hero (cockpit view):** a real-time WebGL dawn sky over an endless sea of clouds, with a pilot's head-up display on top (pitch ladder, roll scale, heading tape, altimeter). Moving the mouse banks the plane, and banking turns it, so the sun moves across the sky. Scrolling pitches the nose down and descends the altimeter. A split-flap "Now executing" display sits below the headline. If WebGL isn't available, a CSS sunset gradient shows instead.
 - **Status board:** the five "When should an airline call AvioSmart?" signals from the current site, shown as a departures board. Hovering over or tapping a row flips it from *Delayed* or *At risk* to *Cleared* or *On time*.
 - **Services:** four photo cards that tilt and glow under the cursor. A full-width night-landing photo with a parallax effect follows them.
 - **Approach:** a flight path that draws itself as you scroll (Pre-flight → Takeoff → Cruise → Landing).
@@ -27,5 +27,5 @@ A redesign concept for [aviosmart.co](https://aviosmart.co). It's a static site 
 ## Files
 - `index.html`: the page markup
 - `styles.css`: all the styles
-- `main.js`: the globe, split-flap display, board, flight path, language toggle and form
+- `main.js`: the cockpit sky and HUD, split-flap display, board, flight path, language toggle and form
 - `assets/`: images
