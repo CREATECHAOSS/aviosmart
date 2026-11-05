@@ -46,8 +46,44 @@
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <canvas id="globe" aria-hidden="true"></canvas>
-      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <canvas id="sky" aria-hidden="true"></canvas>
+      <div class="hero-scrim" aria-hidden="true"></div>
+
+      <!-- Head-up display -->
+      <div class="hud" aria-hidden="true">
+        <div class="hud-heading">
+          <div class="hud-heading-strip" id="hdgStrip"></div>
+          <div class="hud-heading-caret"></div>
+          <div class="hud-heading-val" id="hdgVal">072</div>
+        </div>
+
+        <svg class="hud-center" id="hudCenter" viewBox="-300 -300 600 600">
+          <g id="hudHorizon"></g>
+          <g class="hud-roll">
+            <path d="M-121 -70 A140 140 0 0 1 121 -70" />
+            <path d="M0 -140 V-154 M-24.3 -137.9 L-26.7 -147.7 M24.3 -137.9 L26.7 -147.7 M-47.9 -131.6 L-52.7 -144.7 M47.9 -131.6 L52.7 -144.7 M-70 -121.2 L-77 -133.4 M70 -121.2 L77 -133.4 M-99 -99 L-107.5 -107.5 M99 -99 L107.5 -107.5" />
+            <g id="rollPtr"><path d="M0 -137 l-7 12 h14 z" class="fill" /></g>
+          </g>
+          <g class="fpm">
+            <circle r="9" />
+            <path d="M-9 0 H-30 M9 0 H30 M0 -9 V-20" />
+          </g>
+          <path class="bore" d="M-6 0 H6 M0 -6 V6" />
+        </svg>
+
+        <div class="hud-alt">
+          <div class="hud-alt-window"><div class="hud-alt-strip" id="altStrip"></div></div>
+          <div class="hud-alt-val"><span id="altVal">39,000</span></div>
+          <div class="hud-alt-label">ALT · FT</div>
+        </div>
+
+        <div class="hud-telemetry">
+          <span><small>GS</small> <b id="tGs">486</b> KT</span>
+          <span><small>HDG</small> <b id="tHdg">072°</b></span>
+          <span><small>ALT</small> <b id="tFl">FL390</b></span>
+          <span class="hide-sm"><small>OAT</small> <b>−56°C</b></span>
+        </div>
+      </div>
       <div class="container hero-inner">
         <p class="eyebrow reveal"><span class="dot"></span><span data-i18n="hero.eyebrow">Strategic advisory for airlines</span></p>
         <h1 class="hero-title reveal">

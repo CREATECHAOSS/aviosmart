@@ -252,165 +252,214 @@
   updatePath();
 
   /* ---------------------------------------------------------
-     Hero globe (canvas): rotating dot sphere + live routes
+     Hero: live cockpit view — WebGL dawn sky + cloud sea, with HUD
   --------------------------------------------------------- */
-  const canvas = $("#globe");
-  const ctx = canvas.getContext("2d");
-  const HUBS = [
-    ["BOG", 4.7, -74.1], ["MIA", 25.8, -80.3], ["MAD", 40.5, -3.6], ["MEX", 19.4, -99.1],
-    ["LIM", -12.0, -77.1], ["GRU", -23.4, -46.5], ["PTY", 9.1, -79.4], ["JFK", 40.6, -73.8],
-    ["SCL", -33.4, -70.8], ["EZE", -34.8, -58.5], ["CDG", 49.0, 2.5], ["LHR", 51.5, -0.5],
-    ["DXB", 25.3, 55.4], ["IST", 41.3, 28.8], ["SIN", 1.4, 104.0], ["DFW", 32.9, -97.0],
-    ["LAX", 33.9, -118.4], ["YYZ", 43.7, -79.6], ["FRA", 50.0, 8.6], ["SDQ", 18.4, -69.7]
-  ];
-  const toV = (lat, lon) => {
-    const la = lat * Math.PI / 180, lo = lon * Math.PI / 180;
-    return [Math.cos(la) * Math.sin(lo), Math.sin(la), Math.cos(la) * Math.cos(lo)];
-  };
-  const hubs = HUBS.map(([c, la, lo]) => ({ code: c, v: toV(la, lo) }));
-  const ROUTES = [
-    ["BOG", "MIA"], ["BOG", "MAD"], ["MEX", "JFK"], ["LIM", "GRU"], ["PTY", "BOG"], ["SCL", "EZE"],
-    ["MIA", "LHR"], ["MAD", "IST"], ["GRU", "CDG"], ["JFK", "LHR"], ["DXB", "SIN"], ["FRA", "DXB"],
-    ["LAX", "MEX"], ["DFW", "BOG"], ["YYZ", "FRA"], ["SDQ", "MIA"], ["PTY", "LIM"], ["MAD", "BOG"],
-    ["LHR", "DXB"], ["EZE", "MAD"]
-  ];
-  const hubByCode = Object.fromEntries(hubs.map(h => [h.code, h]));
-  const routes = ROUTES.map(([a, b], i) => ({
-    a: hubByCode[a].v, b: hubByCode[b].v,
-    t: Math.random(), speed: 0.0016 + Math.random() * 0.0018, delay: i * 0.05
-  }));
+  const hero = $(".hero");
+  const canvas = $("#sky");
+  const hudCenter = $("#hudCenter"), hudHorizon = $("#hudHorizon"), rollPtr = $("#rollPtr");
+  const hdgStrip = $("#hdgStrip"), hdgVal = $("#hdgVal");
+  const altStrip = $("#altStrip"), altVal = $("#altVal");
+  const tGs = $("#tGs"), tHdg = $("#tHdg"), tFl = $("#tFl");
 
-  // fibonacci sphere dots
-  const N = 1500, dots = [];
-  const ga = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < N; i++) {
-    const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = ga * i;
-    dots.push([Math.cos(th) * r, y, Math.sin(th) * r]);
+  // ---- build HUD tapes
+  const DEG_PX = 6, FT_PX = 0.08, ALT_MAX = 45000;
+  (() => {
+    let h = "";
+    for (let d = -40; d <= 400; d += 5) {
+      const x = (d + 40) * DEG_PX, n = ((d % 360) + 360) % 360;
+      h += `<i style="left:${x}px" class="${d % 10 === 0 ? "maj" : ""}"></i>`;
+      if (d % 10 === 0) h += `<b style="left:${x}px">${String(n / 10).padStart(2, "0")}</b>`;
+    }
+    hdgStrip.innerHTML = h;
+    let a = "";
+    for (let ft = 0; ft <= ALT_MAX; ft += 500) {
+      const y = (ALT_MAX - ft) * FT_PX;
+      a += `<b style="top:${y}px">${ft % 1000 === 0 ? (ft / 1000).toFixed(0) + "<small>000</small>" : ""}</b>`;
+    }
+    altStrip.innerHTML = a;
+    altStrip.style.height = ALT_MAX * FT_PX + "px";
+  })();
+
+  // ---- pitch ladder (depends on viewport height)
+  const FOCAL = 1.25;
+  function buildLadder(Hc) {
+    let g = `<line x1="-520" y1="0" x2="-70" y2="0" class="hz"/><line x1="70" y1="0" x2="520" y2="0" class="hz"/>`;
+    [-10, -5, 5, 10].forEach(deg => {
+      const y = -Math.tan(deg * Math.PI / 180) * FOCAL * Hc;
+      const dash = deg < 0 ? ` stroke-dasharray="8 6"` : "";
+      const tip = deg < 0 ? -8 : 8;
+      g += `<path d="M-130 ${y + tip} V${y} H-60 M60 ${y} H130 V${y + tip}"${dash}/>`;
+      g += `<text x="-140" y="${y + 4}" text-anchor="end">${Math.abs(deg)}</text><text x="140" y="${y + 4}">${Math.abs(deg)}</text>`;
+    });
+    hudHorizon.innerHTML = g;
   }
 
-  const slerp = (a, b, t) => {
-    const d = Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]));
-    const om = Math.acos(d);
-    if (om < 1e-4) return a.slice();
-    const s = Math.sin(om), k1 = Math.sin((1 - t) * om) / s, k2 = Math.sin(t * om) / s;
-    return [a[0] * k1 + b[0] * k2, a[1] * k1 + b[1] * k2, a[2] * k1 + b[2] * k2];
-  };
-  routes.forEach(r => {
-    const d = Math.acos(Math.max(-1, Math.min(1, r.a[0] * r.b[0] + r.a[1] * r.b[1] + r.a[2] * r.b[2])));
-    r.lift = 0.04 + d * 0.09;
-  });
+  // ---- WebGL
+  const VS = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0., 1.); }`;
+  const FS = `
+  precision highp float;
+  uniform vec2 uRes, uPivot, uPos;
+  uniform float uTime, uRoll, uPitch, uYaw, uSunAz;
+  float hash(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+  float noise(vec2 p){
+    vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3. - 2. * f);
+    return mix(mix(hash(i), hash(i + vec2(1., 0.)), u.x), mix(hash(i + vec2(0., 1.)), hash(i + vec2(1., 1.)), u.x), u.y);
+  }
+  float fbm(vec2 p){
+    float v = 0., a = .5; mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+    for (int i = 0; i < 6; i++) { v += a * noise(p); p = m * p; a *= .5; }
+    return v;
+  }
+  mat2 rot(float a){ float c = cos(a), s = sin(a); return mat2(c, s, -s, c); }
+  void main(){
+    vec2 uv = (gl_FragCoord.xy - uPivot) / uRes.y;
+    uv = rot(-uRoll) * uv;
+    uv.y += uPitch;
+    vec3 rd = normalize(vec3(uv, ${FOCAL.toFixed(2)}));
+    float az = uSunAz - uYaw;
+    vec3 sunDir = normalize(vec3(sin(az), .03, cos(az)));
+    float h = rd.y;
+    float sd = max(dot(rd, sunDir), 0.);
+    float side = pow(max(dot(normalize(rd.xz), normalize(sunDir.xz)), 0.), 2.5);
+    vec3 horC = mix(vec3(.30, .22, .40), vec3(1., .52, .24), side);
+    vec3 sky = mix(horC, vec3(.07, .09, .22), smoothstep(0., .16, h));
+    sky = mix(sky, vec3(.012, .018, .05), smoothstep(.16, .62, h));
+    sky += vec3(1., .74, .42) * smoothstep(.99955, .99985, sd) * 1.5
+         + vec3(1., .6, .3) * pow(sd, 90.) * .55
+         + vec3(1., .5, .25) * pow(sd, 10.) * .22
+         + vec3(1., .45, .25) * pow(sd, 3.) * .08;
+    // stars
+    vec2 sg = vec2(atan(rd.x, rd.z) + uYaw, rd.y / length(rd.xz)) * 140.;
+    vec2 cell = floor(sg);
+    float r = hash(cell);
+    vec2 o = vec2(hash(cell + 7.1), hash(cell + 3.7)) - .5;
+    float star = smoothstep(.09, 0., length(fract(sg) - .5 - o * .7)) * step(.985, r);
+    star *= smoothstep(.1, .4, h) * (.55 + .45 * sin(uTime * 1.7 + r * 90.));
+    sky += star * vec3(.85, .9, 1.);
+    vec3 col = sky;
+    if (h < 0.) {
+      float d = .22 / -h;
+      vec2 wp = rot(-uYaw) * rd.xz * d + uPos;
+      vec2 sunW = vec2(sin(uSunAz), cos(uSunAz));
+      float n  = fbm(wp * 1.7);
+      float n2 = fbm(wp * 1.7 + sunW * .05);
+      float dens = smoothstep(.32, .68, n);
+      float lit = clamp((n - n2) * 7. + .35, 0., 1.);
+      vec3 cc = mix(vec3(.06, .07, .17), vec3(1., .66, .44), lit);
+      cc *= .5 + side * .9;
+      vec3 deck = mix(vec3(.02, .025, .07), cc, dens);
+      float haze = 1. - exp(-d * .16);
+      col = mix(deck, horC * .92, haze);
+    }
+    vec2 q = gl_FragCoord.xy / uRes;
+    col *= .72 + .28 * pow(16. * q.x * q.y * (1. - q.x) * (1. - q.y), .25);
+    gl_FragColor = vec4(col, 1.);
+  }`;
 
-  let W = 0, H = 0, DPR = 1, cx = 0, cy = 0, R = 0;
-  let rot = 1.35, tilt = -0.32, mx = 0, my = 0, tmx = 0, tmy = 0;
+  const gl = canvas.getContext("webgl", { antialias: false, alpha: false, powerPreference: "high-performance" });
+  let prog = null, U = {};
+  if (gl) {
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(s)); return null; } return s; };
+    const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+    if (vs && fs) {
+      prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) prog = null;
+    }
+    if (prog) {
+      gl.useProgram(prog);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      ["uRes", "uPivot", "uPos", "uTime", "uRoll", "uPitch", "uYaw", "uSunAz"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+    }
+  }
+  if (!prog) hero.classList.add("no-webgl");
+
+  let W = 0, H = 0, SCALE = 0.75, px = 0, py = 0, sunAz = 0.2;
   function resize() {
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    W = canvas.clientWidth; H = canvas.clientHeight;
-    canvas.width = W * DPR; canvas.height = H * DPR;
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    if (W > 900) { cx = W * 0.75; cy = H * 0.54; R = Math.min(H * 0.36, W * 0.28); }
-    else { cx = W * 0.72; cy = H * 0.9; R = Math.min(W * 0.62, H * 0.32); }
+    W = hero.clientWidth; H = hero.clientHeight;
+    const desktop = W > 900;
+    SCALE = Math.min(window.devicePixelRatio || 1, desktop ? 1 : 1.5) * (desktop ? 0.7 : 0.8);
+    canvas.width = Math.round(W * SCALE); canvas.height = Math.round(H * SCALE);
+    px = desktop ? W * 0.68 : W * 0.5;
+    py = desktop ? H * 0.56 : H * 0.6;
+    sunAz = desktop ? 0.2 : 0.06;
+    hero.style.setProperty("--px", px + "px");
+    hero.style.setProperty("--py", py + "px");
+    buildLadder(H);
+    if (gl && prog) gl.viewport(0, 0, canvas.width, canvas.height);
   }
   window.addEventListener("resize", resize);
   resize();
+
+  // ---- flight state
+  let roll = 0, pitch = 0, yaw = 0, posX = 0, posZ = 0, tRoll = 0, tPitch = 0;
+  const hasHover = window.matchMedia("(hover: hover)").matches;
   window.addEventListener("pointermove", e => {
-    tmx = (e.clientX / window.innerWidth - 0.5); tmy = (e.clientY / window.innerHeight - 0.5);
+    if (!hasHover || W <= 900) return;
+    tRoll = Math.max(-1, Math.min(1, (e.clientX - px) / (W * 0.5))) * 0.2;
+    tPitch = (0.5 - e.clientY / window.innerHeight) * 0.05;
   }, { passive: true });
 
-  function project(v, scale = 1) {
-    const cr = Math.cos(rot), sr = Math.sin(rot), ct = Math.cos(tilt + my * 0.25), st = Math.sin(tilt + my * 0.25);
-    const x = v[0] * cr + v[2] * sr, z1 = -v[0] * sr + v[2] * cr;
-    const y = v[1] * ct - z1 * st, z = v[1] * st + z1 * ct;
-    return [cx + x * R * scale, cy - y * R * scale, z, x * scale, y * scale];
-  }
-  const visible = p => p[2] > 0 || (p[3] * p[3] + p[4] * p[4]) > 1;
+  let heroVisible = true;
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; if (heroVisible) requestAnimationFrame(frame); })
+    .observe(hero);
 
-  let running = true;
-  new IntersectionObserver(([e]) => { running = e.isIntersecting; if (running) requestAnimationFrame(frame); })
-    .observe($(".hero"));
+  const t0 = performance.now();
+  let last = t0;
+  const fmt = n => Math.round(n).toLocaleString("en-US");
+  function frame(now) {
+    if (!heroVisible) return;
+    now = now || performance.now();
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const t = (now - t0) / 1000;
 
-  function frame() {
-    if (!running) return;
-    mx += (tmx - mx) * 0.04; my += (tmy - my) * 0.04;
-    if (!reduceMotion) rot += 0.0016;
-    const r0 = rot; rot = r0 + mx * 0.4;
-
-    ctx.clearRect(0, 0, W, H);
-
-    // atmosphere glow
-    const g = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.35);
-    g.addColorStop(0, "rgba(92,200,255,0.10)"); g.addColorStop(0.6, "rgba(92,200,255,0.04)"); g.addColorStop(1, "rgba(92,200,255,0)");
-    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 1.35, 0, Math.PI * 2); ctx.fill();
-    // sphere body
-    const b = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
-    b.addColorStop(0, "rgba(30,48,86,0.55)"); b.addColorStop(1, "rgba(8,14,28,0.35)");
-    ctx.fillStyle = b; ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "rgba(140,180,255,0.18)"; ctx.lineWidth = 1; ctx.stroke();
-
-    // dots
-    for (let i = 0; i < N; i++) {
-      const p = project(dots[i]);
-      if (p[2] <= 0) continue;
-      const a = 0.16 + p[2] * 0.62, s = 0.8 + p[2] * 1.3;
-      ctx.fillStyle = `rgba(170,200,255,${a})`;
-      ctx.fillRect(p[0] - s / 2, p[1] - s / 2, s, s);
+    const sp = Math.min(1, window.scrollY / Math.max(1, H));
+    const steer = hasHover && W > 900;
+    if (!steer) { tRoll = 0; tPitch = 0; }
+    const autoRoll = steer ? 0 : Math.sin(t * 0.25) * 0.05;
+    roll += ((tRoll + autoRoll) - roll) * Math.min(1, dt * 2.2);
+    pitch += ((tPitch - sp * 0.16) - pitch) * Math.min(1, dt * 3);
+    if (!reduceMotion) {
+      yaw += roll * dt * 0.22;
+      yaw = Math.max(-0.55, Math.min(0.55, yaw));
+      const spd = 0.075;
+      posX += Math.sin(yaw) * spd * dt; posZ += Math.cos(yaw) * spd * dt;
     }
 
-    // routes
-    const SEG = 48;
-    routes.forEach(r => {
-      if (!reduceMotion) r.t += r.speed;
-      if (r.t > 1.45) r.t = -0.1;
-      const head = Math.min(1, Math.max(0, r.t)), tail = Math.max(0, r.t - 0.45);
-      if (head <= tail) return;
-      // faint full arc
-      ctx.beginPath(); let started = false;
-      for (let k = 0; k <= SEG; k++) {
-        const t = k / SEG, v = slerp(r.a, r.b, t), p = project(v, 1 + r.lift * Math.sin(Math.PI * t));
-        if (!visible(p)) { started = false; continue; }
-        started ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); started = true;
-      }
-      ctx.strokeStyle = "rgba(92,200,255,0.10)"; ctx.lineWidth = 1; ctx.stroke();
-      // bright trail
-      let prev = null;
-      for (let k = 0; k <= SEG; k++) {
-        const t = tail + (head - tail) * (k / SEG);
-        const v = slerp(r.a, r.b, t), p = project(v, 1 + r.lift * Math.sin(Math.PI * t));
-        if (prev && visible(p) && visible(prev)) {
-          const f = k / SEG;
-          ctx.strokeStyle = `rgba(255,${Math.round(150 + 60 * f)},${Math.round(60 + 30 * f)},${f * 0.95})`;
-          ctx.lineWidth = 0.6 + f * 1.6;
-          ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(p[0], p[1]); ctx.stroke();
-        }
-        prev = p;
-      }
-      if (r.t >= 0 && r.t <= 1) {
-        const v = slerp(r.a, r.b, head), p = project(v, 1 + r.lift * Math.sin(Math.PI * head));
-        if (visible(p)) {
-          const hg = ctx.createRadialGradient(p[0], p[1], 0, p[0], p[1], 10);
-          hg.addColorStop(0, "rgba(255,226,168,1)"); hg.addColorStop(1, "rgba(255,181,71,0)");
-          ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(p[0], p[1], 10, 0, Math.PI * 2); ctx.fill();
-        }
-      }
-    });
+    // altitude: climb to cruise on load, descend as you scroll
+    const climb = reduceMotion ? 1 : 1 - Math.pow(1 - Math.min(1, t / 4), 3);
+    const alt = 33000 + 6000 * climb - sp * 9000 + Math.sin(t * 0.8) * 12;
+    const hdg = ((72 + yaw * 57.2958) % 360 + 360) % 360;
+    const gs = 486 + Math.sin(t * 0.37) * 3 - pitch * 60;
 
-    // hubs + labels
-    ctx.font = "600 10px 'JetBrains Mono', monospace";
-    hubs.forEach(h => {
-      const p = project(h.v);
-      if (p[2] <= 0.05) return;
-      const a = Math.min(1, p[2] * 1.4);
-      ctx.fillStyle = `rgba(92,200,255,${a})`;
-      ctx.beginPath(); ctx.arc(p[0], p[1], 2.4, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = `rgba(92,200,255,${a * 0.35})`;
-      ctx.beginPath(); ctx.arc(p[0], p[1], 6, 0, Math.PI * 2); ctx.stroke();
-      if (p[2] > 0.25 && W > 900) {
-        ctx.fillStyle = `rgba(234,240,255,${a * 0.75})`;
-        ctx.fillText(h.code, p[0] + 9, p[1] + 3.5);
-      }
-    });
+    if (prog) {
+      gl.uniform2f(U.uRes, canvas.width, canvas.height);
+      gl.uniform2f(U.uPivot, px * SCALE, (H - py) * SCALE);
+      gl.uniform2f(U.uPos, posX, posZ);
+      gl.uniform1f(U.uTime, t);
+      gl.uniform1f(U.uRoll, roll);
+      gl.uniform1f(U.uPitch, pitch);
+      gl.uniform1f(U.uYaw, yaw);
+      gl.uniform1f(U.uSunAz, sunAz);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
 
-    rot = r0;
-    requestAnimationFrame(frame);
+    // HUD
+    const rd = roll * 57.2958;
+    hudHorizon.setAttribute("transform", `rotate(${-rd}) translate(0 ${pitch * H})`);
+    rollPtr.setAttribute("transform", `rotate(${-rd})`);
+    hdgStrip.style.transform = `translateX(${-(hdg + 40) * DEG_PX}px)`;
+    hdgVal.textContent = String(Math.round(hdg) % 360).padStart(3, "0");
+    altStrip.style.transform = `translateY(${-(ALT_MAX - alt) * FT_PX}px)`;
+    altVal.textContent = fmt(Math.round(alt / 10) * 10);
+    tGs.textContent = Math.round(gs);
+    tHdg.textContent = hdgVal.textContent + "°";
+    tFl.textContent = "FL" + String(Math.round(alt / 1000) * 10).padStart(3, "0");
+
+    if (!reduceMotion || t < 0.1) requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
 

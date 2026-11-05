@@ -3,7 +3,7 @@
 A redesign concept for [aviosmart.co](https://aviosmart.co). It's a static site with no build step: open `index.html` in a browser, or host the folder anywhere (Netlify, Vercel, GitHub Pages, S3).
 
 ## What's in it
-- **Hero:** a live, rotating canvas globe with flight routes between hub airports, plus a split-flap "Now advising on" display.
+- **Hero (cockpit view):** a real-time WebGL dawn sky over an endless sea of clouds, with a pilot's head-up display on top (pitch ladder, roll scale, heading tape, altimeter). Moving the mouse banks the plane, and banking turns it, so the sun moves across the sky. Scrolling pitches the nose down and descends the altimeter. A split-flap "Now advising on" display sits below the headline. If WebGL isn't available, a CSS sunset gradient shows instead.
 - **Departure board:** the services shown as departures, with statuses that update on their own.
 - **Services:** cards that tilt and glow under the cursor.
 - **Approach:** a flight path that draws itself as you scroll (Pre-flight → Takeoff → Cruise → Landing).
